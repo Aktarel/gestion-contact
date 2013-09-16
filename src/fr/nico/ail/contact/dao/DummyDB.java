@@ -16,28 +16,35 @@ public class DummyDB {
 	
 	private static DummyDB instance;
 
-	public static DummyDB getInstance() {
 
-		if (instance == null) {
-			return new DummyDB();
-		} else {
-			return instance;
-		}
+	private DummyDB()
+	{}
+ 
+	private static class DummyDBHolder
+	{		
+		private final static DummyDB instance = new DummyDB();
 	}
-
+ 
+	public static DummyDB getInstance()
+	{
+		return DummyDBHolder.instance;
+	}
+	
+	
+	
 	public void add(Contact contact) {
 
 		boolean flag = false;
 		int i = 0;
 
-		while (flag) {
+		while (flag==false && i<contacts.size()+1) {
 			if (contacts.containsKey(i)) {
+				i++;
+			}else{
 				contact.setIdContact(i);
 				flag = true;
 			}
-			i++;
 		}
-		log.info("Contact crée "+contact);
 		contacts.put(contact.getIdContact(), contact);
 	}
 

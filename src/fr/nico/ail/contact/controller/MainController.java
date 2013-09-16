@@ -24,7 +24,7 @@ import fr.nico.ail.contact.model.Contact;
  * @since 13/09/2013
  */
 
-@Controller
+@Controller(value="/contact/*")
 public class MainController  {
 	
 	
@@ -55,7 +55,7 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp) - on revient à la liste des contacts
 		 */
-	    @RequestMapping(value={"/affichage.htm"},method=RequestMethod.GET)
+	    @RequestMapping(value={"/afficher"},method=RequestMethod.GET)
 	    public String affichageContact(@RequestParam int idContact ,Model model) {
 	    	
 	    	log.info("> demande d'affichage");
@@ -70,7 +70,7 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp) - on revient à la liste des contacts
 		 */
-	    @RequestMapping("/creation.htm")
+	    @RequestMapping("/creer")
 	    public String creationContact(@RequestParam String nomContact,Model model) {
 	    	
 	    	log.info("> demande de creation");
@@ -84,7 +84,7 @@ public class MainController  {
 		 * @return le chemin vers la vue (jsp)
 		 */
 	    
-	    @RequestMapping("/lister.htm")
+	    @RequestMapping("/lister")
 	    public String listerContact(Model model) {
 	    	
 	    	log.info("> demande de listing");
@@ -99,7 +99,7 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp)
 		 */
-	    @RequestMapping("/supprimer.htm")
+	    @RequestMapping("/supprimer")
 	    public String suppressionContact(@RequestParam int idContact,Model model) {
 	    	
 	    	log.info("> demande de suppression");
@@ -113,7 +113,7 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp)
 		 */
-	    @RequestMapping("/maj.htm")
+	    @RequestMapping("/maj")
 	    public String miseJourContact(Model model) {
 	    	
 	    	log.info("> demande de mise à jour");
