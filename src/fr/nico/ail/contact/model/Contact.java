@@ -35,4 +35,12 @@ public class Contact {
 		
 		this.nomContact = nomContact2;
 	}
+
+	@Override
+	public String toString() {
+		return "Contact [idContact=" + idContact + ", nomContact=" + nomContact
+				+ "]";
+	}
+	
+	
 }

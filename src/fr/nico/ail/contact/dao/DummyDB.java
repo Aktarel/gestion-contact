@@ -4,12 +4,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import fr.nico.ail.contact.model.Contact;
 
 public class DummyDB {
 
+	
 	private Map<Integer, Contact> contacts = new HashMap<>();
-
+	private Logger log = Logger.getLogger(DummyDB.class);
+	
 	private static DummyDB instance;
 
 	public static DummyDB getInstance() {
@@ -23,39 +27,37 @@ public class DummyDB {
 
 	public void add(Contact contact) {
 
-//		int id = 0;
-//
-//		for (int i = 0; i < 1000; i++) {
-//			if (contacts.containsKey(i)){
-//				id = i;
-//				break;
-//			}
-//		}
-//		
-//		contact.setIdContact(id);
-		contact.setIdContact(contacts.size()+1);
-		contacts.put(contacts.size()+1, contact);
+		boolean flag = false;
+		int i = 0;
+
+		while (flag) {
+			if (contacts.containsKey(i)) {
+				contact.setIdContact(i);
+				flag = true;
+			}
+			i++;
+		}
+		log.info("Contact crée "+contact);
+		contacts.put(contact.getIdContact(), contact);
 	}
 
 	public void delete(int idContact) {
 
 		contacts.remove(idContact);
-		
+
 	}
 
 	public void update() {
 
 	}
-	
-	public Collection<Contact> list(){
-    	return contacts.values();
 
-		
+	public Collection<Contact> list() {
+		return contacts.values();
+
 	}
 
 	public Contact get(int idContact) {
 		return contacts.get(idContact);
 	}
-	
 
 }

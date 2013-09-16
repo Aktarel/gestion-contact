@@ -62,7 +62,9 @@
 						</resource>
 					</webResources>
 					<warName>gc</warName>
-					<outputDirectory>C:\Users\nicolas\Desktop\apache-tomcat\webapps</outputDirectory>
+					<!-- <outputDirectory>C:\Users\nicolas\Desktop\apache-tomcat\webapps</outputDirectory> -->
+					
+					<outputDirectory>C:\Users\Akta\Desktop\apache-tomcat\webapps</outputDirectory>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<webXml>WebContent/WEB-INF/web.xml</webXml>
 					<!-- <webXml>${project.build.directory}/generated-sources/appengine-endpoints/WEB-INF/web.xml</webXml> -->
