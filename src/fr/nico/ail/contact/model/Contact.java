@@ -1,11 +1,48 @@
 package fr.nico.ail.contact.model;
 
+import java.util.Date;
+import java.util.List;
+
 public class Contact {
 
 	
 	private int idContact;
 	
 	private String nomContact;
+
+	private String email;
+	
+	private Date dateNaissance;
+	
+	
+	//Pour mapper la relation ManyToOne
+	private List<Adresse> adresses;
+	
+	private boolean actif;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
 
 	public String getNomContact() {
 		return nomContact;
@@ -40,6 +77,14 @@ public class Contact {
 	public String toString() {
 		return "Contact [idContact=" + idContact + ", nomContact=" + nomContact
 				+ "]";
+	}
+
+	public List<Adresse> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(List<Adresse> adresses) {
+		this.adresses = adresses;
 	}
 	
 	
