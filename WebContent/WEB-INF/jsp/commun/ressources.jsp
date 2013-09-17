@@ -4,10 +4,9 @@
 <!-- Le javascript
  ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-<link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet">
-<link rel="stylesheet"	href="<c:url value="/css/bootstrap-theme.min.css"/>">
-<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+<link rel="stylesheet"  href="<c:url value="/css/bootstrap.css"/>" />
+<link rel="stylesheet"	href="<c:url value="/css/bootstrap-theme.css"/>" />
+<link rel="stylesheet" href="<c:url value="/css/bootstrap-responsive.css"/>" />
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" />" />
 
 <script src="<c:url value="/js/jquery/jquery.js" />"></script>
@@ -23,4 +22,3 @@
 <script src="<c:url value="/js/bootstrap/button.js"/>"></script>
 <script src="<c:url value="/js/bootstrap/collapse.js"/>"></script>
 <script src="<c:url value="/js/bootstrap/carousel.js"/>"></script>
-<script src="<c:url value="/js/bootstrap/typeahead.js"/>"></script>

@@ -24,7 +24,8 @@ import fr.nico.ail.contact.model.Contact;
  * @since 13/09/2013
  */
 
-@Controller(value="/contact/*")
+@Controller
+@RequestMapping("/contact/*")
 public class MainController  {
 	
 	

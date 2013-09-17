@@ -13,23 +13,27 @@
 </head>
 <body>
 
-	<div id="container">
+	<jsp:include page="../commun/navbar.jsp"></jsp:include>
 
-		<jsp:include page="../commun/navbar.jsp"></jsp:include>
+	<div class="container">
 
 		<!-- Main component for a primary marketing message or call to action -->
 
 		<h1>La liste des contacts</h1>
-		<c:forEach var="contact" items="${contacts}">
-			<p>
+		<p>
+			<c:forEach var="contact" items="${contacts}">
+		
 				<br>
 				<c:out value="${contact.nomContact}"></c:out>
 				<a
 					href="supprimer.htm?idContact=<c:out value='${contact.idContact}' />">
 					Suppression </a>
-			</p>
+			
 		</c:forEach>
+		</p>
 	</div>
+	
+	
 
 </body>
 </html>
