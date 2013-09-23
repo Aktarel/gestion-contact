@@ -26,7 +26,7 @@
 				<br>
 				<c:out value="${contact.nomContact}"></c:out>
 				<a
-					href="supprimer.htm?idContact=<c:out value='${contact.idContact}' />">
+					href="supprimer?idContact=<c:out value='${contact.idContact}' />">
 					Suppression </a>
 			
 		</c:forEach>
