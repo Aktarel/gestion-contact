@@ -1,0 +1,8 @@
+fr\nico\ail\contact\controller\MainController.class
+fr\nico\ail\contact\controller\AdresseController.class
+fr\nico\ail\contact\dao\DummyDB.class
+fr\nico\ail\contact\model\Adresse.class
+fr\nico\ail\contact\dao\DummyDB$1.class
+fr\nico\ail\contact\dao\DummyDB$DummyDBHolder.class
+fr\nico\ail\contact\controller\HomeController.class
+fr\nico\ail\contact\model\Contact.class

@@ -25,11 +25,11 @@ import fr.nico.ail.contact.model.Contact;
  */
 
 @Controller
-@RequestMapping("/contact/*")
-public class MainController  {
+@RequestMapping("/adresse/*")
+public class AdresseController  {
 	
 	
-		private Logger log = Logger.getLogger(MainController.class);
+		private Logger log = Logger.getLogger(AdresseController.class);
 		
 		/**
 		 *  La map contient les contient les contacts et simule ma couche de persistance
@@ -37,7 +37,7 @@ public class MainController  {
 		private DummyDB dummyDB = DummyDB.getInstance();
 		
 		/* Constructeur */
-		public MainController() {
+		public AdresseController() {
 
 			
 			/* Mon jeu de donnée */
@@ -57,10 +57,9 @@ public class MainController  {
 		 * @return le chemin vers la vue (jsp) - on revient à la liste des contacts
 		 */
 	    @RequestMapping(value={"/afficher"},method=RequestMethod.GET)
-	    public String affichageContact(@RequestParam int idContact ,Model model) {
+	    public String affichageAdresse(@RequestParam int idContact ,Model model) {
 	    	
 	    	log.info("> demande d'affichage");
-	    	model.addAttribute("contact",dummyDB.get(idContact));
 	  
 	        return "/contact/affichage";
 	    }
@@ -71,21 +70,11 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp) - on revient à la liste des contacts
 		 */
-	    @RequestMapping("/creer-0")
-	    public String creationFormContact(Model model) {
+	    @RequestMapping("/creer")
+	    public String creationAdresse(@RequestParam String nomContact, @RequestParam String date, @RequestParam String email ,Model model) {
 	    	
-	    	log.info("> demande de creation step 0 ");
-	    	
-	        return "/contact/form/ajoutContact";
-	    }
-	    
-	    @RequestMapping("/creer-1")
-	    public String creationContact(@RequestParam String nom, @RequestParam String dateNaissance, @RequestParam String email,Model model) {
-	    	
-	    	log.info("> demande de creation step 1 ");
-	    	dummyDB.add(new Contact(nom));
-	    	
-	        return "/contact/lister";
+	    	log.info("> demande de creation");
+	        return listerAdresse(model);
 	    }
 
 	    /**
@@ -95,11 +84,9 @@ public class MainController  {
 		 */
 	    
 	    @RequestMapping("/lister")
-	    public String listerContact(Model model) {
+	    public String listerAdresse(Model model) {
 	    	
 	    	log.info("> demande de listing");
-	    	model.addAttribute("contacts", dummyDB.list());
-	    	
 	    	return "/contact/lister";
 	    }
 	    
@@ -110,12 +97,10 @@ public class MainController  {
 		 * @return le chemin vers la vue (jsp)
 		 */
 	    @RequestMapping("/supprimer")
-	    public String suppressionContact(@RequestParam int idContact,Model model) {
+	    public String supprimerContact(@RequestParam int idContact,Model model) {
 	    	
 	    	log.info("> demande de suppression");
-	    	dummyDB.delete(idContact);
-	    	
-	    	return listerContact(model);
+	    	return listerAdresse(model);
 	    }
 	    
 	    /**
@@ -124,10 +109,10 @@ public class MainController  {
 		 * @return le chemin vers la vue (jsp)
 		 */
 	    @RequestMapping("/maj")
-	    public String miseJourContact(Model model) {
+	    public String miseJourAdresse(Model model) {
 	    	
 	    	log.info("> demande de mise à jour");
-	    	return listerContact(model);
+	    	return listerAdresse(model);
 	    	
 	    }
 }

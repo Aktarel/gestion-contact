@@ -62,8 +62,8 @@
 						</resource>
 					</webResources>
 					<warName>gc</warName>
-					<outputDirectory>C:\Users\nicolas\Desktop\apache-tomcat\webapps</outputDirectory>
-					
+				<!-- 	<outputDirectory>C:\Users\nicolas\Desktop\apache-tomcat\webapps</outputDirectory> -->
+						<outputDirectory>C:\Users\nicolas\Desktop\JB6\server\default\deploy</outputDirectory>
 					<!-- <outputDirectory>C:\Users\Akta\Desktop\apache-tomcat\webapps</outputDirectory> -->
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<webXml>WebContent/WEB-INF/web.xml</webXml>
@@ -112,6 +112,13 @@
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.8.3</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
