@@ -92,4 +92,8 @@ public class DummyDB {
 		}
 		return 0;
 	}
+
+	public Adresse getAdresse(int idAdresse) {
+		return adresses.get(idAdresse);
+	}
 }

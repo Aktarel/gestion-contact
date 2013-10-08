@@ -3,9 +3,7 @@ package fr.nico.ail.contact.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -43,22 +41,44 @@ public class ContactController  {
 		 */
 		private DummyDB dummyDB = DummyDB.getInstance();
 		
+		private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
 		/* Constructeur */
-		public ContactController() {
+		public ContactController() throws ParseException {
 
-			List<Adresse> adresses = new ArrayList<>();
-			adresses.add(new Adresse("30","Rue Tolbiac","75013","Paris"));
-			adresses.add(new Adresse("170","Rue des rabats","92160","Antony"));
-			Contact c = new Contact("Salomon");
-			c.setAdresses(adresses);
-			c.setEmail("salomon@gmail.com");
-			c.setDateNaissance(new Date());
-			c.setActif(true);
+			Adresse a1 = new Adresse("30", "Rue Tolbiac","75013", "Paris");
+			Adresse a2 = new Adresse("10", "Rue de la Paix","75001", "Paris");
+			Adresse a3 = new Adresse("18", "Avenue de Foch","94160", "St-Mandé");
+			Adresse a4 = new Adresse("185", "Rue de Solférino","59160", "Lille");
+			Adresse a5 = new Adresse("170", "Rue des rabats","92160", "Antony");
+			Adresse a6 = new Adresse("15", "Rue des allouettes","92320", "Chatillon");
+			
+			Contact c = new Contact("Salomon","Salomon@gmail.com",sdf.parse("18/03/1978"),a1,true);
+			Contact c2 = new Contact("John Parker","parker@orange.com",sdf.parse("12/01/1968"),a2,true);
+			Contact c3 = new Contact("King","king@yahoo.com",sdf.parse("21/04/1975"),a3,true);
+			Contact c4 = new Contact("Georgio","georgio@free.fr",sdf.parse("14/07/1990"),a4,false);
+			Contact c5 = new Contact("King Jr","king-jr@yahoo.com",sdf.parse("11/04/2001"),a5,false);
+			Contact c6 = new Contact("Jessica Parker","jess-sexygirl69@hotmail.com",sdf.parse("14/08/1972"),a2,true);
+			Contact c7 = new Contact("Sti glitz","sti-glitz@deutch-bank.de",sdf.parse("21/12/1986"),a6,false);
+			
+			
+			
+			dummyDB.add(a1);
+			dummyDB.add(a2);
+			dummyDB.add(a3);
+			dummyDB.add(a4);
+			dummyDB.add(a5);
+			dummyDB.add(a6);
+			
+			
 			
 			dummyDB.add(c);
-			dummyDB.add(new Contact("Scott"));
-			dummyDB.add(new Contact("Parker"));
-			dummyDB.add(new Contact("Farell"));
+			dummyDB.add(c2);
+			dummyDB.add(c3);
+			dummyDB.add(c4);
+			dummyDB.add(c5);
+			dummyDB.add(c6);
+			dummyDB.add(c7);
 		}
 		
 		
@@ -88,15 +108,21 @@ public class ContactController  {
 	    public String creationFormContact(Model model) {
 	    	
 	    	log.info("> demande de creation step 0 ");
+	    	model.addAttribute("adresses",dummyDB.listAdresses());
 	    	
 	        return "/contact/form/ajoutContact";
 	    }
 	    
 	    @RequestMapping("/creer-1")
-	    public String creationContact(@RequestParam String nom, @RequestParam String dateNaissance, @RequestParam String email,Model model) {
+	    public String creationContact(@RequestParam String nom, @RequestParam String dateNaissance, @RequestParam String email, @RequestParam int adresse,@RequestParam(required=false) boolean isActive,Model model) {
 	    	
 	    	log.info("> demande de creation step 1 ");
-	    	dummyDB.add(new Contact(nom));
+	    	try {
+				dummyDB.add(new Contact(nom,email,sdf.parse(dateNaissance),dummyDB.getAdresse(adresse),isActive));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	
 	        return listerContact(model);
 	    }
@@ -137,9 +163,10 @@ public class ContactController  {
 		 * @return le chemin vers la vue (jsp)
 		 */
 	    @RequestMapping("/maj-0")
-	    public String miseJourFormContact(@RequestParam String idContact,Model model) {
+	    public String updateFormContact(@RequestParam String idContact,Model model) {
 	    	
 	    	model.addAttribute("contact", dummyDB.get(Integer.parseInt(idContact)));
+	    	model.addAttribute("adresses",dummyDB.listAdresses());
 	    	return "/contact/form/updateContact";
 	    	
 	    }
@@ -151,16 +178,20 @@ public class ContactController  {
 	     * @throws ParseException 
 	  		 */
 	  	    @RequestMapping("/maj-1")
-	  	    public String miseJourFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam boolean isActive,Model model) throws ParseException {
+	  	    public String updateFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam int idAdresse,@RequestParam(required=false) boolean isActive,Model model) throws ParseException {
 	  	    	
 	  	    	log.info("> demande de mise à jour ");
-	  	    	log.info("> on supprime "+idContact);
 	  	    	dummyDB.deleteContact(Integer.parseInt(idContact));
-	  	    	
+	  	    	Adresse adresse = dummyDB.getAdresse(idAdresse);
+		  	    
 	  	    	Contact contact = new Contact();
 	  	    	contact.setNomContact(nomContact);
 	  	    	contact.setEmail(email);
-	  	    	contact.setDateNaissance(new SimpleDateFormat("dd/mm/yyyy").parse(dateNaissance));
+	  	  	
+	  	    	if(dateNaissance!=null)
+	  	    		contact.setDateNaissance(sdf.parse(dateNaissance));
+	  	    	
+	  	    	contact.setAdresse(adresse);
 	  	    	contact.setActif(isActive);
 	  	    	dummyDB.add(contact);
 	  	    	

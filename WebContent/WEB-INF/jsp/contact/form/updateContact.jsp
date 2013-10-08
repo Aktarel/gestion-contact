@@ -21,18 +21,28 @@
 			<input type="hidden" value="${contact.idContact}" name="idContact" />
 			<div class="form-group">
 				<label for="nomContact">Entrez le nom du contact</label> <input type="text"
-					name="nomContact" value="${contact.nomContact}" />
+					 class="form-control" name="nomContact" value="${contact.nomContact}" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="dateNaissance">Entrez la date de naissance</label> <input
-					type="text" name="dateNaissance" value="${contact.dateNaissance}"  />
+					class="form-control" type="text" name="dateNaissance" value="${contact.dateNaissanceToString}"  />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="email">Entrez l'email du contact</label> <input
-					type="text" name="email" value="${contact.email}"  />
+					class="form-control" type="text" name="email" value="${contact.email}"  />
 			</div>
+			<br>
+			<div class="form-group">
+				<label for="idAdresse">Selectionnez l'adresse du contact</label> 
+				<select class="form-control" name="idAdresse" >
+					<c:forEach var="adresse" items="${adresses}">
+						<option value="${adresse.idAdresse}"><c:out value="${adresse}"></c:out></option>
+					</c:forEach>
+				</select>
+			</div>
+			<br>
 			<div class="form-group">
 				<label for="isActive">Est actif ?</label> <input
 					type="checkbox" name="isActive" <c:if test="${contact.actif}"> checked </c:if> />

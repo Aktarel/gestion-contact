@@ -1,7 +1,7 @@
 package fr.nico.ail.contact.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class Contact {
 
@@ -14,9 +14,8 @@ public class Contact {
 	
 	private Date dateNaissance;
 	
-	
 	//Pour mapper la relation ManyToOne
-	private List<Adresse> adresses;
+	private Adresse adresse;
 	
 	private boolean actif;
 	
@@ -34,6 +33,17 @@ public class Contact {
 
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
+	}
+	
+	public String getDateNaissanceToString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if (dateNaissance == null) {
+			return new String();
+		} else {
+			return sdf.format(dateNaissance);
+		}
+		
+		
 	}
 
 	public boolean isActif() {
@@ -79,13 +89,25 @@ public class Contact {
 				+ "]";
 	}
 
-	public List<Adresse> getAdresses() {
-		return adresses;
+	public Adresse getAdresse() {
+		return adresse;
 	}
 
-	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
+
+	public Contact(String nomContact, String email, Date dateNaissance,
+			Adresse adresse, boolean actif) {
+		super();
+		this.nomContact = nomContact;
+		this.email = email;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.actif = actif;
+	}
+
+	
 	
 	
 }

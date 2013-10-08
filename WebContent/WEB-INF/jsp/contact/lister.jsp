@@ -46,12 +46,12 @@
 				<c:forEach var="contact" items="${contacts}">
 					<tr 
 						<c:if test="${ contact.actif == true }">style="background-color:#90EE90;"</c:if>
-						<c:if test="${ contact.actif == false }">style="background-color:#FF3333;"</c:if>
+						<c:if test="${ contact.actif == false }">style="background-color:#FFBABA;"</c:if>
 					>
 						<td><c:out value="${contact.nomContact}"></c:out></td>
 						<td><c:out value="${contact.email}"></c:out></td>
-						<td><c:out value="${contact.dateNaissance}"></c:out></td>
-						<td><c:forEach var="adresse" items="${contact.adresses}"><c:out value="${adresse}"/>,</c:forEach></td>
+						<td><c:out value="${contact.dateNaissanceToString}"></c:out></td>
+						<td><c:out value="${contact.adresse}" /></td>
 						<td width="5%" ><a
 							href="supprimer?idContact=<c:out value='${contact.idContact}' />"><img
 								width="24" height="24"

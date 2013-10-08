@@ -39,9 +39,6 @@ public class AdresseController  {
 		/* Constructeur */
 		public AdresseController() {
 
-			dummyDB.add(new Adresse("30", "rue Tolbiac","75013", "Paris"));
-			dummyDB.add(new Adresse("10", "rue de la paix","75001", "Paris"));
-			
 		}
 		
 		
