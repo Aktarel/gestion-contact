@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sun.istack.internal.NotNull;
+
 import fr.nico.ail.contact.dao.DummyDB;
 import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
+import fr.nico.ail.contact.model.Message;
 
 
 
@@ -124,6 +127,8 @@ public class ContactController  {
 				e.printStackTrace();
 			}
 	    	
+	    	model.addAttribute("message", new Message("Utilisateur ajoutée avec succes","alert alert-success"));
+	    	
 	        return listerContact(model);
 	    }
 
@@ -138,7 +143,6 @@ public class ContactController  {
 	    	
 	    	log.info("> demande de listing");
 	    	model.addAttribute("contacts", dummyDB.listContact());
-	    	
 	    	return "/contact/lister";
 	    }
 	    
@@ -154,6 +158,8 @@ public class ContactController  {
 	    	log.info("> demande de suppression");
 	    	dummyDB.deleteContact(idContact);
 	    	
+	    	model.addAttribute("message", new Message("Suppression du contact accomplie","alert alert-success"));
+	    	
 	    	return listerContact(model);
 	    }
 	    
@@ -167,6 +173,7 @@ public class ContactController  {
 	    	
 	    	model.addAttribute("contact", dummyDB.get(Integer.parseInt(idContact)));
 	    	model.addAttribute("adresses",dummyDB.listAdresses());
+	    	
 	    	return "/contact/form/updateContact";
 	    	
 	    }
@@ -178,8 +185,7 @@ public class ContactController  {
 	     * @throws ParseException 
 	  		 */
 	  	    @RequestMapping("/maj-1")
-	  	    public String updateFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam int idAdresse,@RequestParam(required=false) boolean isActive,Model model) throws ParseException {
-	  	    	
+	  	    public String updateFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam int idAdresse,@RequestParam(required=false) boolean isActive,Model model) {
 	  	    	log.info("> demande de mise à jour ");
 	  	    	dummyDB.deleteContact(Integer.parseInt(idContact));
 	  	    	Adresse adresse = dummyDB.getAdresse(idAdresse);
@@ -188,12 +194,17 @@ public class ContactController  {
 	  	    	contact.setNomContact(nomContact);
 	  	    	contact.setEmail(email);
 	  	  	
-	  	    	if(dateNaissance!=null)
-	  	    		contact.setDateNaissance(sdf.parse(dateNaissance));
+				try {
+					contact.setDateNaissance(sdf.parse(dateNaissance));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 	  	    	
 	  	    	contact.setAdresse(adresse);
 	  	    	contact.setActif(isActive);
 	  	    	dummyDB.add(contact);
+	  	    	
+	  	    	model.addAttribute("message", new Message("Mise à jour des information reussies","alert alert-success"));
 	  	    	
 	  	    	return listerContact(model);
 	  	    	

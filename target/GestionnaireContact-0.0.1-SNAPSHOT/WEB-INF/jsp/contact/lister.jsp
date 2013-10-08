@@ -15,10 +15,17 @@
 
 	<jsp:include page="../commun/navbar.jsp"></jsp:include>
 
+
 	<div class="container">
 
 		<!-- Main component for a primary marketing message or call to action -->
 
+		<c:if test="${message != null}">
+			<div class="${message.type}" >
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				${message.content}
+			</div>
+		</c:if>
 
 		<div class="row">
 			<div class="col-md-11">

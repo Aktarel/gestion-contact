@@ -5,4 +5,5 @@ fr\nico\ail\contact\dao\DummyDB$1.class
 fr\nico\ail\contact\dao\DummyDB$DummyDBHolder.class
 fr\nico\ail\contact\controller\HomeController.class
 fr\nico\ail\contact\controller\ContactController.class
+fr\nico\ail\contact\model\Message.class
 fr\nico\ail\contact\model\Contact.class
