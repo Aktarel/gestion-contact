@@ -44,23 +44,20 @@
 			</thead>
 			<tbody>
 				<c:forEach var="contact" items="${contacts}">
-					<tr 
+					<tr
 						<c:if test="${ contact.actif == true }">style="background-color:#90EE90;"</c:if>
-						<c:if test="${ contact.actif == false }">style="background-color:#FFBABA;"</c:if>
-					>
+						<c:if test="${ contact.actif == false }">style="background-color:#FFBABA;"</c:if>>
 						<td><c:out value="${contact.nomContact}"></c:out></td>
 						<td><c:out value="${contact.email}"></c:out></td>
 						<td><c:out value="${contact.dateNaissanceToString}"></c:out></td>
 						<td><c:out value="${contact.adresse}" /></td>
-						<td width="5%" ><a
-							href="supprimer?idContact=<c:out value='${contact.idContact}' />"><img
-								width="24" height="24"
-								src="<c:url value="/images/contact/delete.png"/>"></img></a>
-								<a
+						<td width="5%"><a
 							href="maj-0?idContact=<c:out value='${contact.idContact}' />"><img
 								width="24" height="24"
-								src="<c:url value="/images/contact/edit.png"/>"></img></a>
-								</td>
+								src="<c:url value="/images/contact/edit.png"/>"></img></a> <a
+							href="supprimer?idContact=<c:out value='${contact.idContact}' />"><img
+								width="24" height="24"
+								src="<c:url value="/images/contact/delete.png"/>"></img></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

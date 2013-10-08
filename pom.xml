@@ -35,7 +35,7 @@
 
 	<properties>
 		<spring.version>3.2.4.RELEASE</spring.version>
-		<appengine.target.version>1.8.3</appengine.target.version>
+		<pathToDeployement>C:\Users\Akta\Desktop\apache-tomcat\webapps</pathToDeployement>
 	</properties>
 
 	<build>
@@ -62,23 +62,12 @@
 						</resource>
 					</webResources>
 					<warName>gc</warName>
-					<!-- <outputDirectory>C:\Users\nicolas\Desktop\apache-tomcat\webapps</outputDirectory> -->
-					<outputDirectory>C:\Users\Akta\Desktop\apache-tomcat\webapps</outputDirectory>
+					<outputDirectory>${pathToDeployement}</outputDirectory>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<webXml>WebContent/WEB-INF/web.xml</webXml>
-					<!-- <webXml>${project.build.directory}/generated-sources/appengine-endpoints/WEB-INF/web.xml</webXml> -->
-					<!-- <webResources> <resource> <directory>${project.build.directory}/generated-sources/appengine-endpoints</directory> 
-						<includes> <include>WEB-INF/*.discovery</include> <include>WEB-INF/*.api</include> 
-						</includes> </resource> </webResources> -->
 				</configuration>
 
 			</plugin>
-
-			<!-- <plugin> <groupId>com.google.appengine</groupId> <artifactId>appengine-maven-plugin</artifactId> 
-				<version>1.8.3</version> <configuration> <enableJarClasses>false</enableJarClasses> 
-				</configuration> <executions> <execution> <id></id> <phase>verify</phase> 
-				<goals> <goal>endpoints_get_discovery_doc</goal> </goals> <inherited>false</inherited> 
-				<configuration> </configuration> </execution> </executions> </plugin> -->
 		</plugins>
 
 	</build>
@@ -105,11 +94,6 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.8.3</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
