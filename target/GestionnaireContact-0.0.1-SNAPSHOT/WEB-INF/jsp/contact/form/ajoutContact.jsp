@@ -25,12 +25,12 @@
 			</div>
 			<br>
 			<div class="form-group">
-				<label for="nom">Entrez la date de naissance</label> <input
+				<label for="dateNaissance">Entrez la date de naissance</label> <input
 					type="text" name="dateNaissance" />
 			</div>
 			<br>
 			<div class="form-group">
-				<label for="nom">Entrez l'email du contact</label> <input
+				<label for="email">Entrez l'email du contact</label> <input
 					type="text" name="email" />
 			</div>
 			<br> <input class="btn btn-default btn-lg" type="submit"

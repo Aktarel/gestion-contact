@@ -16,22 +16,26 @@
 
 	<div class="container">
 		<h1>Formulaire d'ajout d'un contact</h1>
-		<form action="/gc/contact/creer-1" method="post">
+		<form action="/gc/contact/maj-1" method="post">
 			<br>
-
+			<input type="hidden" value="${contact.idContact}" name="idContact" />
 			<div class="form-group">
-				<label for="nom">Entrez le nom du contact</label> <input type="text"
-					name="nom" />
+				<label for="nomContact">Entrez le nom du contact</label> <input type="text"
+					name="nomContact" value="${contact.nomContact}" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="dateNaissance">Entrez la date de naissance</label> <input
-					type="text" name="dateNaissance" />
+					type="text" name="dateNaissance" value="${contact.dateNaissance}"  />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="email">Entrez l'email du contact</label> <input
-					type="text" name="email" />
+					type="text" name="email" value="${contact.email}"  />
+			</div>
+			<div class="form-group">
+				<label for="isActive">Est actif ?</label> <input
+					type="checkbox" name="isActive" <c:if test="${contact.actif}"> checked </c:if> />
 			</div>
 			<br> <input class="btn btn-default btn-lg" type="submit"
 				value="Soumettre" />

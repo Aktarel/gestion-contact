@@ -17,12 +17,10 @@
 
 	<div class="container">
 
-		<!-- Main component for a primary marketing message or call to action -->
-
 
 		<div class="row">
 			<div class="col-md-11">
-				<h1>La liste des contacts</h1>
+				<h1>La liste des adresses</h1>
 			</div>
 			<div class="col-md-1 add">
 				<a href="creer-0"><img width="32" height="32"
@@ -35,32 +33,23 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Nom</th>
-					<th>Email</th>
-					<th>Date de naissance</th>
-					<th>Adresse</th>
+					<th>Numéro + Rue</th>
+					<th>Ville</th>
+					<th>Code postal</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="contact" items="${contacts}">
-					<tr 
-						<c:if test="${ contact.actif == true }">style="background-color:#90EE90;"</c:if>
-						<c:if test="${ contact.actif == false }">style="background-color:#FF3333;"</c:if>
-					>
-						<td><c:out value="${contact.nomContact}"></c:out></td>
-						<td><c:out value="${contact.email}"></c:out></td>
-						<td><c:out value="${contact.dateNaissance}"></c:out></td>
-						<td><c:forEach var="adresse" items="${contact.adresses}"><c:out value="${adresse}"/>,</c:forEach></td>
+			<c:out value="${adresse}"></c:out>
+				<c:forEach var="adresse" items="${adresses}">
+					<tr >
+						<td><c:out value="${adresse.numero}"></c:out> <c:out value="${adresse.rue}"></c:out></td>
+						<td><c:out value="${adresse.ville}"></c:out></td>
+						<td><c:out value="${adresse.codePostal}"></c:out></td>
 						<td width="5%" ><a
-							href="supprimer?idContact=<c:out value='${contact.idContact}' />"><img
+							href="supprimer?idAdresse=<c:out value='${adresse.idAdresse}' />"><img
 								width="24" height="24"
-								src="<c:url value="/images/contact/delete.png"/>"></img></a>
-								<a
-							href="maj-0?idContact=<c:out value='${contact.idContact}' />"><img
-								width="24" height="24"
-								src="<c:url value="/images/contact/edit.png"/>"></img></a>
-								</td>
+								src="<c:url value="/images/contact/delete.png"/>"></img></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

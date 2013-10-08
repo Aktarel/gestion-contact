@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.nico.ail.contact.dao.DummyDB;
-import fr.nico.ail.contact.model.Contact;
+import fr.nico.ail.contact.model.Adresse;
 
 
 
@@ -39,13 +39,9 @@ public class AdresseController  {
 		/* Constructeur */
 		public AdresseController() {
 
+			dummyDB.add(new Adresse("30", "rue Tolbiac","75013", "Paris"));
+			dummyDB.add(new Adresse("10", "rue de la paix","75001", "Paris"));
 			
-			/* Mon jeu de donnée */
-			dummyDB.add( new Contact("King"));
-			dummyDB.add(new Contact("Merkel"));
-			dummyDB.add(new Contact("Coppé"));
-			dummyDB.add(new Contact("Alassad"));
-			dummyDB.add(new Contact("Hollande"));
 		}
 		
 		
@@ -65,6 +61,29 @@ public class AdresseController  {
 	    }
 		
 	    /**
+	  		 * Permet de créer un contact en insérant un objet contact dans la map mesContacts
+	  		 * @param nomContact : le nom du contact pour lequel on veut créer un contact
+	  		 * @param model : le modèle à renvoyer à la vue
+	  		 * @return le chemin vers la vue (jsp) - on revient à la liste des contacts
+	  		 */
+	  	    @RequestMapping("/creer-0")
+	  	    public String creationFormContact(Model model) {
+	  	    	
+	  	    	log.info("> demande de creation step 0 ");
+	  	    	
+	  	        return "/adresse/form/ajoutAdresse";
+	  	    }
+	  	    
+	  	    @RequestMapping("/creer-1")
+	  	    public String creationContact(@RequestParam String numero,@RequestParam String rue, @RequestParam String ville, @RequestParam String codePostal,Model model) {
+	  	    	
+	  	    	log.info("> demande de creation step 1 ");
+	  	    	//dummyDB.add(new Contact(nom));
+	  	    	
+	  	        return listerAdresse(model);
+	  	    }
+	  	    
+	  	    /**
 		 * Permet de créer un contact en insérant un objet contact dans la map mesContacts
 		 * @param nomContact : le nom du contact pour lequel on veut créer un contact
 		 * @param model : le modèle à renvoyer à la vue
@@ -87,7 +106,8 @@ public class AdresseController  {
 	    public String listerAdresse(Model model) {
 	    	
 	    	log.info("> demande de listing");
-	    	return "/contact/lister";
+	    	model.addAttribute("adresses", dummyDB.listAdresses());
+	    	return "/adresse/lister";
 	    }
 	    
 	    
@@ -97,9 +117,10 @@ public class AdresseController  {
 		 * @return le chemin vers la vue (jsp)
 		 */
 	    @RequestMapping("/supprimer")
-	    public String supprimerContact(@RequestParam int idContact,Model model) {
+	    public String supprimerAdresse(@RequestParam int idAdresse,Model model) {
 	    	
 	    	log.info("> demande de suppression");
+	    	dummyDB.deleteAdresse(idAdresse);
 	    	return listerAdresse(model);
 	    }
 	    
@@ -108,11 +129,24 @@ public class AdresseController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp)
 		 */
-	    @RequestMapping("/maj")
+	    @RequestMapping("/maj-0")
 	    public String miseJourAdresse(Model model) {
 	    	
 	    	log.info("> demande de mise à jour");
-	    	return listerAdresse(model);
+	    	return "/adresse/form/updateAdresse";
+	    	
+	    }
+	    
+	    /**
+		 * Permet de mettre à jour un contact dans la map mesContacts
+		 * @param model : le modèle à renvoyer à la vue
+		 * @return le chemin vers la vue (jsp)
+		 */
+	    @RequestMapping("/maj-1")
+	    public String miseJourAdresseFinaleStep(Model model) {
+	    	
+	    	log.info("> demande de mise à jour");
+	    	return "/adresse/form/updateAdresse";
 	    	
 	    }
 }

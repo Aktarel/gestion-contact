@@ -1,6 +1,12 @@
 package fr.nico.ail.contact.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.nico.ail.contact.dao.DummyDB;
+import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
 
 
@@ -26,10 +33,10 @@ import fr.nico.ail.contact.model.Contact;
 
 @Controller
 @RequestMapping("/contact/*")
-public class MainController  {
+public class ContactController  {
 	
 	
-		private Logger log = Logger.getLogger(MainController.class);
+		private Logger log = Logger.getLogger(ContactController.class);
 		
 		/**
 		 *  La map contient les contient les contacts et simule ma couche de persistance
@@ -37,15 +44,21 @@ public class MainController  {
 		private DummyDB dummyDB = DummyDB.getInstance();
 		
 		/* Constructeur */
-		public MainController() {
+		public ContactController() {
 
+			List<Adresse> adresses = new ArrayList<>();
+			adresses.add(new Adresse("30","Rue Tolbiac","75013","Paris"));
+			adresses.add(new Adresse("170","Rue des rabats","92160","Antony"));
+			Contact c = new Contact("Salomon");
+			c.setAdresses(adresses);
+			c.setEmail("salomon@gmail.com");
+			c.setDateNaissance(new Date());
+			c.setActif(true);
 			
-			/* Mon jeu de donnée */
-			dummyDB.add( new Contact("King"));
-			dummyDB.add(new Contact("Merkel"));
-			dummyDB.add(new Contact("Coppé"));
-			dummyDB.add(new Contact("Alassad"));
-			dummyDB.add(new Contact("Hollande"));
+			dummyDB.add(c);
+			dummyDB.add(new Contact("Scott"));
+			dummyDB.add(new Contact("Parker"));
+			dummyDB.add(new Contact("Farell"));
 		}
 		
 		
@@ -85,7 +98,7 @@ public class MainController  {
 	    	log.info("> demande de creation step 1 ");
 	    	dummyDB.add(new Contact(nom));
 	    	
-	        return "/contact/lister";
+	        return listerContact(model);
 	    }
 
 	    /**
@@ -98,7 +111,7 @@ public class MainController  {
 	    public String listerContact(Model model) {
 	    	
 	    	log.info("> demande de listing");
-	    	model.addAttribute("contacts", dummyDB.list());
+	    	model.addAttribute("contacts", dummyDB.listContact());
 	    	
 	    	return "/contact/lister";
 	    }
@@ -113,7 +126,7 @@ public class MainController  {
 	    public String suppressionContact(@RequestParam int idContact,Model model) {
 	    	
 	    	log.info("> demande de suppression");
-	    	dummyDB.delete(idContact);
+	    	dummyDB.deleteContact(idContact);
 	    	
 	    	return listerContact(model);
 	    }
@@ -123,11 +136,35 @@ public class MainController  {
 		 * @param model : le modèle à renvoyer à la vue
 		 * @return le chemin vers la vue (jsp)
 		 */
-	    @RequestMapping("/maj")
-	    public String miseJourContact(Model model) {
+	    @RequestMapping("/maj-0")
+	    public String miseJourFormContact(@RequestParam String idContact,Model model) {
 	    	
-	    	log.info("> demande de mise à jour");
-	    	return listerContact(model);
+	    	model.addAttribute("contact", dummyDB.get(Integer.parseInt(idContact)));
+	    	return "/contact/form/updateContact";
 	    	
 	    }
+	    
+	    /**
+	  		 * Permet de mettre à jour un contact dans la map mesContacts
+	  		 * @param model : le modèle à renvoyer à la vue
+	  		 * @return le chemin vers la vue (jsp)
+	     * @throws ParseException 
+	  		 */
+	  	    @RequestMapping("/maj-1")
+	  	    public String miseJourFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam boolean isActive,Model model) throws ParseException {
+	  	    	
+	  	    	log.info("> demande de mise à jour ");
+	  	    	log.info("> on supprime "+idContact);
+	  	    	dummyDB.deleteContact(Integer.parseInt(idContact));
+	  	    	
+	  	    	Contact contact = new Contact();
+	  	    	contact.setNomContact(nomContact);
+	  	    	contact.setEmail(email);
+	  	    	contact.setDateNaissance(new SimpleDateFormat("dd/mm/yyyy").parse(dateNaissance));
+	  	    	contact.setActif(isActive);
+	  	    	dummyDB.add(contact);
+	  	    	
+	  	    	return listerContact(model);
+	  	    	
+	  	    }
 }

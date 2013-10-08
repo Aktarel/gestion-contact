@@ -2,6 +2,7 @@ package fr.nico.ail.contact.model;
 
 public class Adresse {
 
+	private int idAdresse;
 	
 	private String numero;
 	
@@ -19,6 +20,14 @@ public class Adresse {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+
+	public Adresse(String numero, String rue, String codePostal, String ville) {
+		super();
+		this.numero = numero;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
 	}
 
 	public String getRue() {
@@ -50,6 +59,11 @@ public class Adresse {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return numero+" "+rue+" "+codePostal + " "+ville;
+	}
+
 	public Contact getContact() {
 		return contact;
 	}
@@ -57,5 +71,14 @@ public class Adresse {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
+
+	public int getIdAdresse() {
+		return idAdresse;
+	}
+
+	public void setIdAdresse(int idAdresse) {
+		this.idAdresse = idAdresse;
+	}
+
 	
 }
