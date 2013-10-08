@@ -21,7 +21,7 @@
 
 			<div class="form-group">
 				<label for="numero">Entrez le numero de rue</label> <input type="text"
-					name="numero" />
+					class="form-control"  name="numero" />
 			</div>
 			<br>
 			<div class="form-group">
@@ -31,15 +31,15 @@
 			<br>
 			<div class="form-group">
 				<label for="ville">Entrez la ville</label> <input
-					type="text" name="ville" />
+					class="form-control"  type="text" name="ville" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="codePostal">Entrez le code postal</label> <input
-					type="text" name="codePostal" />
+					 class="form-control" type="text" name="codePostal" />
 			</div>
 			<br> <input class="btn btn-default btn-lg" type="submit"
-				value="Soumettre" />
+				 class="form-control" value="Soumettre" />
 		</form>
 	</div>
 
