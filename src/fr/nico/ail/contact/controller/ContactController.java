@@ -3,7 +3,6 @@ package fr.nico.ail.contact.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.sun.istack.internal.NotNull;
 
 import fr.nico.ail.contact.dao.DummyDB;
 import fr.nico.ail.contact.model.Adresse;

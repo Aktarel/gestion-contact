@@ -19,7 +19,6 @@
 
   <welcome-file-list>
     <welcome-file>
-      /jsp/contact/lister.jsp
     </welcome-file>
   </welcome-file-list>
 
