@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<h1>Formulaire d'ajout d'une adresse</h1>
-		<form action="/gc/adresse/creer-1" method="post">
+		<form action="/adresse/creer-1" method="post">
 			<br>
 
 			<div class="form-group">
@@ -26,7 +26,7 @@
 			<br>
 			<div class="form-group">
 				<label for="rue">Entrez la rue</label> <input
-					type="text" name="rue" />
+					class="form-control" type="text" name="rue" />
 			</div>
 			<br>
 			<div class="form-group">

@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<h1>Formulaire d'ajout d'un contact</h1>
-		<form action="/gc/contact/creer-1" method="post">
+		<form action="/contact/creer-1" method="post">
 			<br>
 
 			<div class="form-group">

@@ -8,7 +8,7 @@
 				data-target=".navbar-collapse">
 				<span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Gestionnaire de contact</a>
+			<a class="navbar-brand" href="/">Gestionnaire de contact</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">

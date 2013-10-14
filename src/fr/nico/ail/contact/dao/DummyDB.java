@@ -11,9 +11,9 @@ import fr.nico.ail.contact.model.Contact;
 
 public class DummyDB {
 
-	private Map<Integer, Contact> contacts = new HashMap<>();
+	private Map<Integer, Contact> contacts = new HashMap();
 
-	private Map<Integer, Adresse> adresses = new HashMap<>();
+	private Map<Integer, Adresse> adresses = new HashMap();
 
 	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(DummyDB.class);

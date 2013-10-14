@@ -54,7 +54,7 @@ public class AdresseController  {
 	    	
 	    	log.info("> demande d'affichage");
 	  
-	        return "/contact/affichage";
+	        return "contact/affichage";
 	    }
 		
 	    /**
@@ -68,7 +68,7 @@ public class AdresseController  {
 	  	    	
 	  	    	log.info("> demande de creation step 0 ");
 	  	    	
-	  	        return "/adresse/form/ajoutAdresse";
+	  	        return "adresse/form/ajoutAdresse";
 	  	    }
 	  	    
 	  	    @RequestMapping("/creer-1")
@@ -104,7 +104,7 @@ public class AdresseController  {
 	    	
 	    	log.info("> demande de listing");
 	    	model.addAttribute("adresses", dummyDB.listAdresses());
-	    	return "/adresse/lister";
+	    	return "adresse/lister";
 	    }
 	    
 	    
@@ -130,7 +130,7 @@ public class AdresseController  {
 	    public String miseJourAdresse(Model model) {
 	    	
 	    	log.info("> demande de mise à jour");
-	    	return "/adresse/form/updateAdresse";
+	    	return "adresse/form/updateAdresse";
 	    	
 	    }
 	    
@@ -143,7 +143,7 @@ public class AdresseController  {
 	    public String miseJourAdresseFinaleStep(Model model) {
 	    	
 	    	log.info("> demande de mise à jour");
-	    	return "/adresse/form/updateAdresse";
+	    	return "adresse/form/updateAdresse";
 	    	
 	    }
 }

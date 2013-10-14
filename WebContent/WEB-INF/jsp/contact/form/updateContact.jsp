@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<h1>Formulaire d'ajout d'un contact</h1>
-		<form action="/gc/contact/maj-1" method="post">
+		<form action="/contact/maj-1" method="post">
 			<br>
 			<input type="hidden" value="${contact.idContact}" name="idContact" />
 			<div class="form-group">

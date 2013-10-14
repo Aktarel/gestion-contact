@@ -95,7 +95,7 @@ public class ContactController  {
 	    	log.info("> demande d'affichage");
 	    	model.addAttribute("contact",dummyDB.get(idContact));
 	  
-	        return "/contact/affichage";
+	        return "contact/affichage";
 	    }
 		
 	    /**
@@ -110,7 +110,7 @@ public class ContactController  {
 	    	log.info("> demande de creation step 0 ");
 	    	model.addAttribute("adresses",dummyDB.listAdresses());
 	    	
-	        return "/contact/form/ajoutContact";
+	        return "contact/form/ajoutContact";
 	    }
 	    
 	    @RequestMapping("/creer-1")
@@ -140,7 +140,7 @@ public class ContactController  {
 	    	
 	    	log.info("> demande de listing");
 	    	model.addAttribute("contacts", dummyDB.listContact());
-	    	return "/contact/lister";
+	    	return "contact/lister";
 	    }
 	    
 	    
@@ -171,7 +171,7 @@ public class ContactController  {
 	    	model.addAttribute("contact", dummyDB.get(Integer.parseInt(idContact)));
 	    	model.addAttribute("adresses",dummyDB.listAdresses());
 	    	
-	    	return "/contact/form/updateContact";
+	    	return "contact/form/updateContact";
 	    	
 	    }
 	    

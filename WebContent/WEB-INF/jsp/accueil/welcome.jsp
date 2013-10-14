@@ -16,12 +16,18 @@
 
 
 	<jsp:include page="../commun/navbar.jsp"></jsp:include>
-	
+
 	<div class="container">
-		<h1>Bienvenue à vous, cher visiteur</h1>
-		<p>Ce gestionnaire de contact est un projet école (ESIEA) permettant d'approfondir nos connaissances en J2EE / IHM et Web Programming</p>
+		<h1>Bienvenue à vous, cher visiteur / Hello World</h1>
+		<p>Ce projet est une application pour le module IHM de 5eme Année
+			réalisés par deux étudiants de l'ESIEA :
+		<ul>
+			<li>Nicolas LEBEC</li>
+			<li>Remy OUADAH</li>
+		</ul>
+		</p>
 
 	</div>
-	
+
 </body>
 </html>
