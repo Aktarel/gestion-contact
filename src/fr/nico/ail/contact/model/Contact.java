@@ -42,8 +42,15 @@ public class Contact {
 		} else {
 			return sdf.format(dateNaissance);
 		}
-		
-		
+	}
+
+	public String getDateNaissanceDateValue() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (dateNaissance == null) {
+			return new String();
+		} else {
+			return sdf.format(dateNaissance);
+		}
 	}
 
 	public boolean isActif() {
@@ -70,7 +77,6 @@ public class Contact {
 		this.idContact = idContact;
 	}
 	public Contact() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Contact(int i, String string) {
@@ -79,7 +85,6 @@ public class Contact {
 	}
 
 	public Contact(String nomContact2) {
-		
 		this.nomContact = nomContact2;
 	}
 
@@ -105,6 +110,8 @@ public class Contact {
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
 		this.actif = actif;
+		
+		adresse.add(this);
 	}
 
 	

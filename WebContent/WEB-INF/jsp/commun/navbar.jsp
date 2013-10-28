@@ -13,10 +13,10 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 			
-				<li <c:if test="${ contacts != null }">class="active"</c:if> ><a href="<c:url value="/contact/lister"/>"><img
+				<li <c:if test="${ section == 'contact' }">class="active"</c:if> ><a href="<c:url value="/contact/lister"/>"><img
 						width="28" height="28" alt="Liste contact"
 						src="<c:url value="/images/contact/list.png"/>" /></a></li>
-				<li <c:if test="${ adresses != null }">class="active"</c:if>><a href="<c:url value="/adresse/lister"/>"><img
+				<li <c:if test="${ section == 'adresse' }">class="active"</c:if>><a href="<c:url value="/adresse/lister"/>"><img
 						width="28" height="28" alt="Liste adresses"
 						src="<c:url value="/images/adresse/list.png"/>" /></a></li>
 			</ul>

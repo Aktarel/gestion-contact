@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<h1>Formulaire d'ajout d'une adresse</h1>
-		<form action="/adresse/creer-1" method="post">
+		<form action="<c:url value="/adresse/creer-1"/>" method="post">
 			<br>
 
 			<div class="form-group">

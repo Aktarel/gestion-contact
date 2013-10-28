@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.nico.ail.contact.dao.AdresseDAOImpl;
+import fr.nico.ail.contact.dao.ContactDAOImpl;
 import fr.nico.ail.contact.dao.DummyDB;
 import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
@@ -39,7 +41,9 @@ public class ContactController  {
 		/**
 		 *  La map contient les contient les contacts et simule ma couche de persistance
 		 */
-		private DummyDB dummyDB = DummyDB.getInstance();
+		private DummyDB<Contact> contactDAO = ContactDAOImpl.getInstance();
+		
+		private DummyDB<Adresse> adresseDAO = AdresseDAOImpl.getInstance();
 		
 		private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
@@ -62,23 +66,22 @@ public class ContactController  {
 			Contact c7 = new Contact("Sti glitz","sti-glitz@deutch-bank.de",sdf.parse("21/12/1986"),a6,false);
 			
 			
-			
-			dummyDB.add(a1);
-			dummyDB.add(a2);
-			dummyDB.add(a3);
-			dummyDB.add(a4);
-			dummyDB.add(a5);
-			dummyDB.add(a6);
-			
+			adresseDAO.create(a1);
+			adresseDAO.create(a2);
+			adresseDAO.create(a3);
+			adresseDAO.create(a4);
+			adresseDAO.create(a5);
+			adresseDAO.create(a6);
 			
 			
-			dummyDB.add(c);
-			dummyDB.add(c2);
-			dummyDB.add(c3);
-			dummyDB.add(c4);
-			dummyDB.add(c5);
-			dummyDB.add(c6);
-			dummyDB.add(c7);
+			
+			contactDAO.create(c);
+			contactDAO.create(c2);
+			contactDAO.create(c3);
+			contactDAO.create(c4);
+			contactDAO.create(c5);
+			contactDAO.create(c6);
+			contactDAO.create(c7);
 		}
 		
 		
@@ -93,8 +96,8 @@ public class ContactController  {
 	    public String affichageContact(@RequestParam int idContact ,Model model) {
 	    	
 	    	log.info("> demande d'affichage");
-	    	model.addAttribute("contact",dummyDB.get(idContact));
-	  
+	    	model.addAttribute("contact",contactDAO.read(idContact));
+	    	
 	        return "contact/affichage";
 	    }
 		
@@ -108,8 +111,8 @@ public class ContactController  {
 	    public String creationFormContact(Model model) {
 	    	
 	    	log.info("> demande de creation step 0 ");
-	    	model.addAttribute("adresses",dummyDB.listAdresses());
-	    	
+	    	model.addAttribute("adresses",adresseDAO.list());
+	    	model.addAttribute("section","contact");
 	        return "contact/form/ajoutContact";
 	    }
 	    
@@ -117,14 +120,16 @@ public class ContactController  {
 	    public String creationContact(@RequestParam String nom, @RequestParam String dateNaissance, @RequestParam String email, @RequestParam int adresse,@RequestParam(required=false) boolean isActive,Model model) {
 	    	
 	    	log.info("> demande de creation step 1 ");
+	    	String[] date = dateNaissance.split("-");
 	    	try {
-				dummyDB.add(new Contact(nom,email,sdf.parse(dateNaissance),dummyDB.getAdresse(adresse),isActive));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				contactDAO.create(new Contact(nom,email,sdf.parse(date[2]+"/"+date[1]+"/"+date[0]),adresseDAO.read(adresse),isActive));
+				model.addAttribute("message", new Message("Utilisateur ajoutée avec succes","alert alert-success"));
+	    	} catch (ParseException e) {
+	    		model.addAttribute("message", new Message("Echec dans l'ajout de l'utilisateur "+nom,"alert alert-error"));
 				e.printStackTrace();
 			}
 	    	
-	    	model.addAttribute("message", new Message("Utilisateur ajoutée avec succes","alert alert-success"));
+	    	model.addAttribute("section","contact");
 	    	
 	        return listerContact(model);
 	    }
@@ -139,7 +144,8 @@ public class ContactController  {
 	    public String listerContact(Model model) {
 	    	
 	    	log.info("> demande de listing");
-	    	model.addAttribute("contacts", dummyDB.listContact());
+	    	model.addAttribute("contacts", contactDAO.list());
+	    	model.addAttribute("section","contact");
 	    	return "contact/lister";
 	    }
 	    
@@ -153,7 +159,7 @@ public class ContactController  {
 	    public String suppressionContact(@RequestParam int idContact,Model model) {
 	    	
 	    	log.info("> demande de suppression");
-	    	dummyDB.deleteContact(idContact);
+	    	contactDAO.delete(idContact);
 	    	
 	    	model.addAttribute("message", new Message("Suppression du contact accomplie","alert alert-success"));
 	    	
@@ -168,9 +174,9 @@ public class ContactController  {
 	    @RequestMapping("/maj-0")
 	    public String updateFormContact(@RequestParam String idContact,Model model) {
 	    	
-	    	model.addAttribute("contact", dummyDB.get(Integer.parseInt(idContact)));
-	    	model.addAttribute("adresses",dummyDB.listAdresses());
-	    	
+	    	model.addAttribute("contact", contactDAO.read(Integer.parseInt(idContact)));
+	    	model.addAttribute("adresses",adresseDAO.list());
+	    	model.addAttribute("section","contact");
 	    	return "contact/form/updateContact";
 	    	
 	    }
@@ -184,22 +190,24 @@ public class ContactController  {
 	  	    @RequestMapping("/maj-1")
 	  	    public String updateFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam int idAdresse,@RequestParam(required=false) boolean isActive,Model model) {
 	  	    	log.info("> demande de mise à jour ");
-	  	    	dummyDB.deleteContact(Integer.parseInt(idContact));
-	  	    	Adresse adresse = dummyDB.getAdresse(idAdresse);
+	  	    	
+	  	    	String[] date = dateNaissance.split("-");
+	  	    	contactDAO.delete(Integer.parseInt(idContact));
+	  	    	Adresse adresse = adresseDAO.read(idAdresse);
 		  	    
 	  	    	Contact contact = new Contact();
 	  	    	contact.setNomContact(nomContact);
 	  	    	contact.setEmail(email);
 	  	  	
 				try {
-					contact.setDateNaissance(sdf.parse(dateNaissance));
+					contact.setDateNaissance(sdf.parse(date[2]+"/"+date[1]+"/"+date[0]));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 	  	    	
 	  	    	contact.setAdresse(adresse);
 	  	    	contact.setActif(isActive);
-	  	    	dummyDB.add(contact);
+	  	    	contactDAO.create(contact);
 	  	    	
 	  	    	model.addAttribute("message", new Message("Mise à jour des information reussies","alert alert-success"));
 	  	    	

@@ -15,8 +15,8 @@
 
 
 	<div class="container">
-		<h1>Formulaire d'ajout d'un contact</h1>
-		<form action="/contact/maj-1" method="post">
+		<h1>Formulaire de mise à jour d'un contact</h1>
+		<form action="<c:url value="/contact/maj-1" />" method="post">
 			<br>
 			<input type="hidden" value="${contact.idContact}" name="idContact" />
 			<div class="form-group">
@@ -26,12 +26,12 @@
 			<br>
 			<div class="form-group">
 				<label for="dateNaissance">Entrez la date de naissance</label> <input
-					class="form-control" type="text" name="dateNaissance" value="${contact.dateNaissanceToString}"  />
+					class="form-control" type="date" name="dateNaissance" value="${contact.dateNaissanceDateValue}"  />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="email">Entrez l'email du contact</label> <input
-					class="form-control" type="text" name="email" value="${contact.email}"  />
+					class="form-control" pattern="^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$" type="text" name="email" value="${contact.email}"  />
 			</div>
 			<br>
 			<div class="form-group">

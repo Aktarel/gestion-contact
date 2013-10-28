@@ -1,5 +1,8 @@
 package fr.nico.ail.contact.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Adresse {
 
 	private int idAdresse;
@@ -12,7 +15,7 @@ public class Adresse {
 	
 	private String ville;
 
-	private Contact contact;
+	private List<Contact> contacts = new ArrayList<Contact>();
 	
 	public String getNumero() {
 		return numero;
@@ -59,18 +62,18 @@ public class Adresse {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public String toString() {
-		return numero+" "+rue+" "+codePostal + " "+ville;
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.numero)
+		.append(" ")
+		.append(rue)
+		.append(" ")
+		.append(codePostal)
+		.append(" ")
+		.append(ville);
+		return sb.toString();
 	}
 
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
-	}
 
 	public int getIdAdresse() {
 		return idAdresse;
@@ -78,6 +81,17 @@ public class Adresse {
 
 	public void setIdAdresse(int idAdresse) {
 		this.idAdresse = idAdresse;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+	public void add(Contact c){
+		contacts.add(c);
 	}
 
 	
