@@ -1,14 +1,15 @@
-package fr.nico.ail.contact.dao;
+package fr.nico.ail.contact.dao.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.nico.ail.contact.dao.DummyDB;
 import fr.nico.ail.contact.model.Contact;
 
 public class ContactDAOImpl implements DummyDB<Contact> {
 
-	private Map<Integer, Contact> contacts = new HashMap();
+	private Map<Integer, Contact> contacts = new HashMap<Integer,Contact>();
 	
 	private ContactDAOImpl() {
 		

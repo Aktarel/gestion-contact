@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.nico.ail.contact.dao.AdresseDAOImpl;
-import fr.nico.ail.contact.dao.ContactDAOImpl;
 import fr.nico.ail.contact.dao.DummyDB;
+import fr.nico.ail.contact.dao.impl.AdresseDAOImpl;
+import fr.nico.ail.contact.dao.impl.ContactDAOImpl;
 import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
+import fr.nico.ail.contact.model.Message;
 
 
 
@@ -90,6 +91,7 @@ public class AdresseController  {
 	  	    	log.info("> demande de creation step 1 ");
 	  	    	adresseDAO.create(new Adresse(numero, rue, codePostal, ville));
 	  	    	
+	  	    	model.addAttribute("message", new Message("Succès dans la création de l'adresse","alert alert-success"));
 	  	        return listerAdresse(model);
 	  	    }
 	  	    
@@ -119,6 +121,7 @@ public class AdresseController  {
 	    @RequestMapping("/supprimer")
 	    public String supprimerAdresse(@RequestParam int idAdresse,Model model) {
 	    	
+	    	StringBuilder contactConcat = new StringBuilder();
 	    	log.info("> demande de suppression");
 	    	Adresse a = adresseDAO.read(idAdresse);
 	    	
@@ -126,13 +129,17 @@ public class AdresseController  {
 	    	for(Contact c : contactsLieAdresse){
 	    		c.setAdresse(null);
 	    		contactDAO.update(c);
-	    	}
-	    	
-	    	
+	    		contactConcat.append("<a href=\"/contact/maj-0?idContact="+c.getIdContact()+"\">"+c.getNomContact() + "</a> ");
+	    	 }
 	    	
 	    	
 	    	adresseDAO.delete(idAdresse);
 	    	
+	    	if(contactConcat.length()>0)
+	    		model.addAttribute("message", new Message("Suppression effectué ! Pensez à ré-adresser les contacts suivant : "+contactConcat.toString(),"alert alert-warning"));
+	    	else
+	    		model.addAttribute("message", new Message("Suppression effectué ! ","alert alert-success"));
+
 	    	return listerAdresse(model);
 	    }
 	    

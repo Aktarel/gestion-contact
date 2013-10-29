@@ -27,7 +27,7 @@
 			<br>
 			<div class="form-group">
 				<label for="dateNaissance">Entrez la date de naissance</label> 
-				<input	class="form-control" type="date" name="dateNaissance" />
+				<input	class="form-control" type="date" pattern="^\d{1,2}/\d{1,2}/\d{4}$" name="dateNaissance" />
 			</div>
 			<br>
 			<div class="form-group">

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.nico.ail.contact.dao.AdresseDAOImpl;
-import fr.nico.ail.contact.dao.ContactDAOImpl;
 import fr.nico.ail.contact.dao.DummyDB;
+import fr.nico.ail.contact.dao.impl.AdresseDAOImpl;
+import fr.nico.ail.contact.dao.impl.ContactDAOImpl;
 import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
 import fr.nico.ail.contact.model.Message;
@@ -190,8 +190,17 @@ public class ContactController  {
 	  	    @RequestMapping("/maj-1")
 	  	    public String updateFinalStep(@RequestParam String idContact,@RequestParam String nomContact,@RequestParam String email, @RequestParam String dateNaissance , @RequestParam int idAdresse,@RequestParam(required=false) boolean isActive,Model model) {
 	  	    	log.info("> demande de mise à jour ");
-	  	    	
+	  	    	String dateFinale;
 	  	    	String[] date = dateNaissance.split("-");
+	  	    	
+	  	    	/* En cas de mauvais support HTML 5 [ MSIE && Mozilla firefox]*/
+	  	    	if(date.length<3){
+	  	    		dateFinale = dateNaissance;
+	  	    	}
+	  	    	else{
+	  	    		dateFinale = date[2]+"/"+date[1]+"/"+date[0];
+	  	    	}
+	  	    	
 	  	    	contactDAO.delete(Integer.parseInt(idContact));
 	  	    	Adresse adresse = adresseDAO.read(idAdresse);
 		  	    
@@ -200,7 +209,7 @@ public class ContactController  {
 	  	    	contact.setEmail(email);
 	  	  	
 				try {
-					contact.setDateNaissance(sdf.parse(date[2]+"/"+date[1]+"/"+date[0]));
+					contact.setDateNaissance(sdf.parse(dateFinale));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}

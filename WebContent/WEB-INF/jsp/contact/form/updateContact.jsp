@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ajouter un contact</title>
+
+<c:set var="browser" value="${header['User-Agent']}" scope="session"/>
 </head>
 <body>
 	<jsp:include page="../../commun/navbar.jsp"></jsp:include>
@@ -26,7 +29,7 @@
 			<br>
 			<div class="form-group">
 				<label for="dateNaissance">Entrez la date de naissance</label> <input
-					class="form-control" type="date" name="dateNaissance" value="${contact.dateNaissanceDateValue}"  />
+					class="form-control" type="date" name="dateNaissance" pattern="^\d{1,2}/\d{1,2}/\d{4}$" value="<c:choose><c:when test="${fn:contains(header['user-agent'], 'Chrome')}">${contact.dateNaissanceDateValue}</c:when><c:otherwise>${contact.dateNaissanceToString}</c:otherwise></c:choose>"  />
 			</div>
 			<br>
 			<div class="form-group">
