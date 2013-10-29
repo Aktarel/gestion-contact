@@ -22,7 +22,7 @@
 
 		<c:if test="${message != null}">
 			<div class="${message.type}" >
-				<button type="button" class="close" data-dismiss="alert">×</button>
+				<button type="button" class="close" data-dismiss="alert" >×</button>
 				${message.content}
 			</div>
 		</c:if>

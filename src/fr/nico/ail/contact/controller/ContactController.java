@@ -120,9 +120,19 @@ public class ContactController  {
 	    public String creationContact(@RequestParam String nom, @RequestParam String dateNaissance, @RequestParam String email, @RequestParam int adresse,@RequestParam(required=false) boolean isActive,Model model) {
 	    	
 	    	log.info("> demande de creation step 1 ");
-	    	String[] date = dateNaissance.split("-");
+	    	String dateFinale;
+  	    	String[] date = dateNaissance.split("-");
+  	    	
+  	    	/* En cas de mauvais support HTML 5 [ MSIE && Mozilla firefox]*/
+  	    	if(date.length<3){
+  	    		dateFinale = dateNaissance;
+  	    	}
+  	    	else{
+  	    		dateFinale = date[2]+"/"+date[1]+"/"+date[0];
+  	    	}
+  	    	
 	    	try {
-				contactDAO.create(new Contact(nom,email,sdf.parse(date[2]+"/"+date[1]+"/"+date[0]),adresseDAO.read(adresse),isActive));
+				contactDAO.create(new Contact(nom,email,sdf.parse(dateFinale),adresseDAO.read(adresse),isActive));
 				model.addAttribute("message", new Message("Utilisateur ajoutée avec succes","alert alert-success"));
 	    	} catch (ParseException e) {
 	    		model.addAttribute("message", new Message("Echec dans l'ajout de l'utilisateur "+nom,"alert alert-error"));
@@ -204,19 +214,14 @@ public class ContactController  {
 	  	    	contactDAO.delete(Integer.parseInt(idContact));
 	  	    	Adresse adresse = adresseDAO.read(idAdresse);
 		  	    
-	  	    	Contact contact = new Contact();
-	  	    	contact.setNomContact(nomContact);
-	  	    	contact.setEmail(email);
-	  	  	
+	  	    	Contact contact = null;
 				try {
-					contact.setDateNaissance(sdf.parse(dateFinale));
+					contact = new Contact(nomContact,email,sdf.parse(dateFinale),adresse,isActive);
+					contactDAO.create(contact);
 				} catch (ParseException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	  	    	
-	  	    	contact.setAdresse(adresse);
-	  	    	contact.setActif(isActive);
-	  	    	contactDAO.create(contact);
 	  	    	
 	  	    	model.addAttribute("message", new Message("Mise à jour des information reussies","alert alert-success"));
 	  	    	

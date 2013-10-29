@@ -24,7 +24,7 @@
 			<input type="hidden" value="${contact.idContact}" name="idContact" />
 			<div class="form-group">
 				<label for="nomContact">Entrez le nom du contact</label> <input type="text"
-					 class="form-control" name="nomContact" value="${contact.nomContact}" />
+					 class="form-control" placeholder="Entrez le nom du contact" name="nomContact" value="${contact.nomContact}" />
 			</div>
 			<br>
 			<div class="form-group">
@@ -34,7 +34,7 @@
 			<br>
 			<div class="form-group">
 				<label for="email">Entrez l'email du contact</label> <input
-					class="form-control" pattern="^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$" type="text" name="email" value="${contact.email}"  />
+					class="form-control" placeholder="Entrez l'email du contact"	 pattern="^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$" type="text" name="email" value="${contact.email}"  />
 			</div>
 			<br>
 			<div class="form-group">

@@ -21,22 +21,22 @@
 
 			<div class="form-group">
 				<label for="numero">Entrez le numero de rue</label> <input type="text"
-					class="form-control"  name="numero" />
+					class="form-control"  placeholder="Entrez le numéro de la rue"   name="numero" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="rue">Entrez la rue</label> <input
-					class="form-control" type="text" name="rue" />
+					class="form-control"  placeholder="Entrez le nom de la rue"  type="text" name="rue" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="ville">Entrez la ville</label> <input
-					class="form-control"  type="text" name="ville" />
+					class="form-control" placeholder="Entrez le nom d'une ville"   type="text" name="ville" />
 			</div>
 			<br>
 			<div class="form-group">
 				<label for="codePostal">Entrez le code postal</label> <input
-					 class="form-control" type="text" name="codePostal" />
+					 class="form-control" placeholder="Entrez un code postal" type="text" name="codePostal" />
 			</div>
 			<br> <input class="btn btn-default btn-lg" type="submit"
 				 class="form-control" value="Soumettre" />
