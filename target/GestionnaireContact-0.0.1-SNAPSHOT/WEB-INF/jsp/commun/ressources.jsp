@@ -4,8 +4,8 @@
 <!-- Le javascript
  ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<link rel="stylesheet"  href="<c:url value="/css/bootstrap.css"/>" />
-<link rel="stylesheet"	href="<c:url value="/css/bootstrap-theme.css"/>" />
+<link rel="stylesheet"  href="<c:url value="/css/bootstrap.min.css"/>" />
+<link rel="stylesheet"	href="<c:url value="/css/bootstrap-theme.min.css"/>" />
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-responsive.css"/>" />
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" />" />
 
