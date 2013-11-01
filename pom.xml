@@ -35,7 +35,7 @@
 
 	<properties>
 		<spring.version>3.2.4.RELEASE</spring.version>
-		<pathToDeployement>C:\Users\akta\Desktop\JB6\server\default\deploy</pathToDeployement>
+		<pathToDeployement>C:\Users\nicolas\Desktop\apache-tomcat\webapps</pathToDeployement>
 	</properties>
 
 	<build>

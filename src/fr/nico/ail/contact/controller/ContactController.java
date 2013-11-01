@@ -17,6 +17,7 @@ import fr.nico.ail.contact.dao.impl.ContactDAOImpl;
 import fr.nico.ail.contact.model.Adresse;
 import fr.nico.ail.contact.model.Contact;
 import fr.nico.ail.contact.model.Message;
+import fr.nico.ail.contact.model.MessageType;
 
 
 
@@ -133,9 +134,9 @@ public class ContactController  {
   	    	
 	    	try {
 				contactDAO.create(new Contact(nom,email,sdf.parse(dateFinale),adresseDAO.read(adresse),isActive));
-				model.addAttribute("message", new Message("Utilisateur ajoutée avec succes","alert alert-success"));
+				model.addAttribute("message", new Message("Utilisateur ajoutée avec succes",MessageType.succes));
 	    	} catch (ParseException e) {
-	    		model.addAttribute("message", new Message("Echec dans l'ajout de l'utilisateur "+nom,"alert alert-error"));
+	    		model.addAttribute("message", new Message("Echec dans l'ajout de l'utilisateur "+nom,MessageType.erreur));
 				e.printStackTrace();
 			}
 	    	
@@ -171,7 +172,7 @@ public class ContactController  {
 	    	log.info("> demande de suppression");
 	    	contactDAO.delete(idContact);
 	    	
-	    	model.addAttribute("message", new Message("Suppression du contact accomplie","alert alert-success"));
+	    	model.addAttribute("message", new Message("Suppression du contact accomplie",MessageType.succes));
 	    	
 	    	return listerContact(model);
 	    }
@@ -223,7 +224,7 @@ public class ContactController  {
 					e.printStackTrace();
 				}
 	  	    	
-	  	    	model.addAttribute("message", new Message("Mise à jour des information reussies","alert alert-success"));
+	  	    	model.addAttribute("message", new Message("Mise à jour des information reussies",MessageType.succes));
 	  	    	
 	  	    	return listerContact(model);
 	  	    	

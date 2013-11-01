@@ -18,7 +18,7 @@
 	<div class="container">
 		
 		<c:if test="${message != null}">
-			<div class="${message.type}" >
+			<div class="${message.type.correspondance}" >
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						${message.content}
 			</div>
